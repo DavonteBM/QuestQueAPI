@@ -1,10 +1,12 @@
+//Imports
 import mongoose from "mongoose";
 
+//Schema for Answer data model
 const AnswerSchema = new mongoose.Schema(
   {
     question: { type: String, required: true, unique: true },
     solution: { type: String, required: true },
-    explanation: { type: String },
+    explanation: { type: String, required: true },
   },
 
   {
@@ -12,4 +14,5 @@ const AnswerSchema = new mongoose.Schema(
   }
 );
 
+//Exporting answer data model
 export const AnswerModel = mongoose.model("answers", AnswerSchema);

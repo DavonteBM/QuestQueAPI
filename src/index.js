@@ -1,3 +1,4 @@
+//Imports
 import "dotenv/config";
 import express from "express";
 import mongoose from "mongoose";
@@ -6,14 +7,15 @@ import { answerRoutes } from "./routes/answerRoutes.js";
 
 const app = express();
 
-const port = process.env.SERVER_PORT;
+//Middleware
 app.use(express.json());
-
 app.use("/auth", userRoutes);
 app.use("/answers", answerRoutes);
 
+// Connection to database
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
 
-app.listen(port, () => {
+//Server listening on port
+app.listen(process.env.SERVER_PORT, () => {
   console.log(`Server started`);
 });
