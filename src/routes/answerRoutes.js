@@ -32,9 +32,7 @@ router.post("/create", verifyToken, async (req, res) => {
     question: req.body.question,
     solution: req.body.solution,
     explanation: req.body.explanation,
-    userOwner: req.body.userOwner,
   });
-  console.log(answer);
 
   try {
     const result = await answer.save();
@@ -43,7 +41,6 @@ router.post("/create", verifyToken, async (req, res) => {
         question: result.question,
         solution: result.solution,
         explanation: result.explanation,
-        userOwner: result.userOwner,
         _id: result._id,
       },
     });
@@ -54,7 +51,7 @@ router.post("/create", verifyToken, async (req, res) => {
 });
 
 //Update an answer by id
-router.put("/:answerId", async (req, res) => {
+router.put("/:answerId", verifyToken, async (req, res) => {
   const answer = {
     question: req.body.question,
     solution: req.body.solution,
@@ -72,7 +69,7 @@ router.put("/:answerId", async (req, res) => {
 });
 
 //Delete an answer by id
-router.delete("/:answerId", async (req, res) => {
+router.delete("/:answerId", verifyToken, async (req, res) => {
   try {
     const result = await AnswerModel.findByIdAndDelete(req.params.answerId);
     res.status(200).json({ message: "Deleted answer successfully" });
