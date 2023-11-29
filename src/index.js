@@ -2,6 +2,7 @@
 import "dotenv/config";
 import express from "express";
 import mongoose from "mongoose";
+import { limiter } from "../security/security.js";
 import { userRoutes } from "./routes/userRoutes.js";
 import { answerRoutes } from "./routes/answerRoutes.js";
 
@@ -9,6 +10,7 @@ const app = express();
 
 //Middleware
 app.use(express.json());
+app.use(limiter);
 app.use("/auth", userRoutes);
 app.use("/answers", answerRoutes);
 
